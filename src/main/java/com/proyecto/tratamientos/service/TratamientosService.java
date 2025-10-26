@@ -19,5 +19,9 @@ public interface TratamientosService {
 	public List<Tratamientos> listado () throws Exception;
 
 	public void eliminarTratamiento (int id) throws Exception;
+	
+	Tratamientos buscarPorId(int id) throws Exception;
+
+	
 
 }

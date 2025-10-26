@@ -12,7 +12,7 @@ import com.proyecto.tratamientos.repository.TratamientosRepository;
 
 import com.proyecto.tratamientos.dto.TratamientosDTO;
 
-@Service   // <-- ESTA ANOTACIÓN ES LA CLAVE
+@Service   
 public class TratamientosServiceImp implements TratamientosService {
 
     @Autowired
@@ -22,7 +22,7 @@ public class TratamientosServiceImp implements TratamientosService {
     @Override
     public Tratamientos agregarTratamiento(TratamientosDTO tratamientoDTO) throws Exception {
         String codigo = UUID.randomUUID().toString();
-        return tratamientosRepository.save(tratamientoDTO.toEntity(codigo));
+        return tratamientosRepository.save(tratamientoDTO.toEntity());
    
 	}
 
@@ -56,4 +56,11 @@ public class TratamientosServiceImp implements TratamientosService {
 		 tratamientosRepository.delete(tratamiento);
 		
 	}
+	
+	@Override
+	public Tratamientos buscarPorId(int id) throws Exception {
+	    Optional<Tratamientos> optTratamiento = tratamientosRepository.findById(id);
+	    return optTratamiento.orElseThrow(() -> new Exception("Tratamiento no encontrado con id: " + id));
+	}
+
 }

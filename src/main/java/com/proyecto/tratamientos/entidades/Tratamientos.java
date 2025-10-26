@@ -33,20 +33,18 @@ public class Tratamientos {
     @Column(name = "DuracionEstimado")
     private String duracionEstimado;
     
-    @Column(name = "FechaCreacion")
-    private LocalDateTime fechaCreacion;
+   
 
 
 	
 
 
-	public Tratamientos( String nombre, String descripcion, BigDecimal costoBase, String duracionEstimado, LocalDateTime fechaCreacion) {
+	public Tratamientos( String nombre, String descripcion, BigDecimal costoBase, String duracionEstimado) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.costoBase = costoBase;
 		this.duracionEstimado = duracionEstimado;
-		this.fechaCreacion = fechaCreacion;
 
 	}
 	
@@ -115,15 +113,6 @@ public class Tratamientos {
 
 
 
-	public LocalDateTime getFechaCreacion() {
-		return fechaCreacion;
-	}
-
-
-
-	public void setFechaCreacion(LocalDateTime fechaCreacion) {
-		this.fechaCreacion = fechaCreacion;
-	}
 
 
 

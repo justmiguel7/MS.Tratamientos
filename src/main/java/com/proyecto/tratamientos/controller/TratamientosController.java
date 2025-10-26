@@ -2,77 +2,64 @@ package com.proyecto.tratamientos.controller;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.proyecto.tratamientos.entidades.Tratamientos;
 import com.proyecto.tratamientos.dto.TratamientosDTO;
-
 import com.proyecto.tratamientos.service.TratamientosService;
 
 import jakarta.validation.Valid;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/", allowCredentials = "false")
-@RequestMapping("/tratamiento")
+@CrossOrigin(origins = "http://localhost:4200") // Ajustá según tu frontend
+@RequestMapping("/tratamientos")
 public class TratamientosController {
 
-	
-	
-	@Autowired
-	private TratamientosService tratamientosService;
-		
+    @Autowired
+    private TratamientosService tratamientosService;
 
-  @RequestMapping(value="/agregar", method={RequestMethod.POST})
-	public ResponseEntity<TratamientosDTO> persistirTratamiento (@Valid @RequestBody  TratamientosDTO tratamientoDTO ) throws Exception{
-		
-	  tratamientosService.agregarTratamiento(tratamientoDTO);
+    @PostMapping("/agregar")
+    public ResponseEntity<Tratamientos> persistirTratamiento(
+            @Valid @RequestBody TratamientosDTO tratamientoDTO) throws Exception {
 
-		return new ResponseEntity<TratamientosDTO>(tratamientoDTO, HttpStatus.CREATED);
-	}
-	
-	
-	@RequestMapping(value="/buscar/{nombre}", method={RequestMethod.GET})
-	public ResponseEntity<Tratamientos> busarPorNombre ( @PathVariable("nombre") String nombre) throws Exception{
-		Tratamientos tratamientos = tratamientosService.buscarPorNombre(nombre);
-		  return new ResponseEntity<>(tratamientos,HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value="/buscarPorapellido/{nombre}/{apellido}", method={RequestMethod.GET})
-	public ResponseEntity<Tratamientos> buscarPorApellido ( @PathVariable("nombre") String Nombre, @PathVariable("descripcion") String Descripcion) throws Exception{
-		Tratamientos tratamientos = tratamientosService.buscarPorNombreYDescripcion(Nombre, Descripcion);
-		  return new ResponseEntity<>(tratamientos,HttpStatus.OK);
-	}
-	
-	
-	
-	
-	@RequestMapping(value="/listado", method={RequestMethod.GET})
-	public ResponseEntity<List<Tratamientos>> listado() throws Exception{
-		  return new ResponseEntity<>(tratamientosService.listado(),HttpStatus.OK);
-	}
-	
-	
-	@RequestMapping(value="/eliminar/{id}", method={RequestMethod.GET})
-	public ResponseEntity<Tratamientos> eliminarPaciente(@PathVariable("id") int id) throws Exception{
-		tratamientosService.eliminarTratamiento(id);
-		  return new ResponseEntity<>(HttpStatus.OK);
-	}
-	
-	
-	
-	
+        Tratamientos nuevo = tratamientosService.agregarTratamiento(tratamientoDTO);
+        return new ResponseEntity<>(nuevo, HttpStatus.CREATED);
+    }
+
+    @GetMapping("/buscar/{nombre}")
+    public ResponseEntity<Tratamientos> buscarPorNombre(@PathVariable String nombre) throws Exception {
+        Tratamientos tratamiento = tratamientosService.buscarPorNombre(nombre);
+        return new ResponseEntity<>(tratamiento, HttpStatus.OK);
+    }
+
+    @GetMapping("/buscarPorNombreDescripcion/{nombre}/{descripcion}")
+    public ResponseEntity<Tratamientos> buscarPorNombreYDescripcion(
+            @PathVariable String nombre,
+            @PathVariable String descripcion) throws Exception {
+
+        Tratamientos tratamiento = tratamientosService.buscarPorNombreYDescripcion(nombre, descripcion);
+        return new ResponseEntity<>(tratamiento, HttpStatus.OK);
+    }
+
+    @GetMapping("/listado")
+    public ResponseEntity<List<Tratamientos>> listado() throws Exception {
+        List<Tratamientos> lista = tratamientosService.listado();
+        return new ResponseEntity<>(lista, HttpStatus.OK);
+    }
+
+    @DeleteMapping("/eliminar/{id}")
+    public ResponseEntity<Void> eliminarTratamiento(@PathVariable int id) throws Exception {
+        tratamientosService.eliminarTratamiento(id);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+    @GetMapping("/{id}")
+    public ResponseEntity<Tratamientos> buscarPorId(@PathVariable int id) throws Exception {
+        Tratamientos tratamiento = tratamientosService.buscarPorId(id);
+        return new ResponseEntity<>(tratamiento, HttpStatus.OK);
+    }
+
+
 }
-
