@@ -39,7 +39,7 @@ public class Tratamientos {
 	
 
 
-	public Tratamientos( String nombre, String descripcion, BigDecimal costoBase, String duracionEstimado) {
+	public Tratamientos(int id, String nombre, String descripcion, BigDecimal costoBase, String duracionEstimado) {
 		super();
 		this.nombre = nombre;
 		this.descripcion = descripcion;

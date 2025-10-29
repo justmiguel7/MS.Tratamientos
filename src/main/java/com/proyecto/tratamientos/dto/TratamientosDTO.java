@@ -38,7 +38,7 @@ public class TratamientosDTO {
     }
 
     public Tratamientos toEntity() {
-        return new Tratamientos(this.nombre, this.descripcion, this.costoBase, this.duracionEstimado);
+        return new Tratamientos(this.id, this.nombre, this.descripcion, this.costoBase, this.duracionEstimado);
     }
 
     public TratamientosDTO() {}
