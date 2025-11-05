@@ -22,6 +22,7 @@ public interface TratamientosService {
 	
 	Tratamientos buscarPorId(int id) throws Exception;
 
-	
+	List<Tratamientos> buscarPorIds(List<Integer> ids) throws Exception;
+
 
 }

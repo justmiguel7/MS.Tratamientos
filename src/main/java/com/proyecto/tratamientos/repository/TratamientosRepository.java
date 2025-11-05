@@ -14,4 +14,5 @@ public interface TratamientosRepository extends JpaRepository<Tratamientos, Inte
 	public Optional<Tratamientos> findByNombreAndDescripcion (String Nombre, String Descripcion) throws Exception; 
 
 	
+	
 }

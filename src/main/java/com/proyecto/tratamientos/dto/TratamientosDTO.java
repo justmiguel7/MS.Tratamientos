@@ -42,4 +42,9 @@ public class TratamientosDTO {
     }
 
     public TratamientosDTO() {}
+    
+    public BigDecimal getCosto() {
+        return this.costoBase;
+    }
+
 }

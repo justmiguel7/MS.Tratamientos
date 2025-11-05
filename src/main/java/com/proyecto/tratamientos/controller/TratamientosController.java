@@ -60,6 +60,12 @@ public class TratamientosController {
         Tratamientos tratamiento = tratamientosService.buscarPorId(id);
         return new ResponseEntity<>(tratamiento, HttpStatus.OK);
     }
+    
+    @PostMapping("/por-ids")
+    public ResponseEntity<List<Tratamientos>> buscarPorIds(@RequestBody List<Integer> ids) throws Exception {
+        List<Tratamientos> tratamientos = tratamientosService.buscarPorIds(ids);
+        return new ResponseEntity<>(tratamientos, HttpStatus.OK);
+    }
 
 
 }

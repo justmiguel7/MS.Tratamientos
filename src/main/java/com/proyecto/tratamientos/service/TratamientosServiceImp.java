@@ -62,5 +62,11 @@ public class TratamientosServiceImp implements TratamientosService {
 	    Optional<Tratamientos> optTratamiento = tratamientosRepository.findById(id);
 	    return optTratamiento.orElseThrow(() -> new Exception("Tratamiento no encontrado con id: " + id));
 	}
+	
+	@Override
+	public List<Tratamientos> buscarPorIds(List<Integer> ids) throws Exception {
+	    return tratamientosRepository.findAllById(ids);
+	}
+
 
 }
